@@ -49,4 +49,9 @@ class MainActivity : AppCompatActivity() {
             }
         )
     }
+    rvMain.apply {
+        layoutManager = GridLayoutManager(this@MainActivity, 3)
+        adapter = ListPokemonAdapter
+    }
+
 }
