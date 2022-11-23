@@ -3,6 +3,7 @@ package com.example.mypokemon
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mypokemon.adapter.ListPokemonAdapter
 import com.example.mypokemon.databinding.ActivityMainBinding
@@ -11,7 +12,6 @@ import com.example.mypokemon.models.PokemonResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy{
@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.rcView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+       // binding.rcView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        binding.rcView.layoutManager = GridLayoutManager(this, 4 )
         populatePokemon()
     }
 
@@ -47,11 +48,16 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+
         )
+        //val LiniearLayoutManager = 0
+
+       // binding.rcView.layoutManager = GridLayoutManager(this, 4 )
     }
-    rvMain.apply {
-        layoutManager = GridLayoutManager(this@MainActivity, 3)
-        adapter = ListPokemonAdapter
-    }
+
+
+//        binding.rcView.layoutManager = GridLayoutManager(this@MainActivity, 3)
+//        adapter = ListPokemonAdapter
+
 
 }
