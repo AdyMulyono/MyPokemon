@@ -8,4 +8,7 @@ import retrofit2.http.GET
 interface APIServices {
     @GET("pokemon")
     fun getAllPokemon() : Call<PokemonResponse>
+
+    @GET("pokeball")
+    fun getAllPokeball() : Call<PokemonResponse>
 }
