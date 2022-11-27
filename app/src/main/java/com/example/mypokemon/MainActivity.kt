@@ -19,26 +19,23 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.ArrayList
 
-class MainActivity() : AppCompatActivity(), Parcelable {
+class MainActivity() : AppCompatActivity() {
     private val binding by lazy{
         ActivityMainBinding.inflate((layoutInflater))
-    }
-
-    constructor(parcel: Parcel) : this() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.rcView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
-//        binding.rcView.layoutManager = GridLayoutManager(this, 4 )
+        binding.rcMain.layoutManager = GridLayoutManager(this, 4 )
+        populateregion()
         populatePokemon()
     }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        binding.rcView.layoutManager = GridLayoutManager(this, 4 )
-        populateregion()
+
     }
     private fun populatePokemon() {
         RetrofilExecutor.doRetroExecutor().getAllPokemon().enqueue(
@@ -68,9 +65,6 @@ class MainActivity() : AppCompatActivity(), Parcelable {
 
     }
 
-//    private fun ListPokemonAdapter1(listPokemon: ArrayList<PokemonResponse.PokemonData>): ListPokemonAdapter1 {
-//        //test
-//    }
 
     private fun populateregion(){
     RetrofilExecutor.doRetroExecutor().getAllRegion().enqueue(
@@ -92,30 +86,10 @@ class MainActivity() : AppCompatActivity(), Parcelable {
             }
 
         }
-
-
-
     )
 
 }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<MainActivity> {
-        override fun createFromParcel(parcel: Parcel): MainActivity {
-            return MainActivity(parcel)
-        }
-
-        override fun newArray(size: Int): Array<MainActivity?> {
-            return arrayOfNulls(size)
-        }
-    }
 }
 
 

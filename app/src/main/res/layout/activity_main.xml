@@ -12,11 +12,21 @@
         android:id="@+id/rcView"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:id="@+id/region"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="POKEMON REGION"
+        app:layout_constraintTop_toBottomOf="@+id/rcView"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="15dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/rcView" />
+        app:layout_constraintTop_toBottomOf="@+id/region" />
 
 
 
