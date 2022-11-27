@@ -19,26 +19,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.ArrayList
 
-class MainActivity() : AppCompatActivity(), Parcelable {
+class MainActivity() : AppCompatActivity() {
     private val binding by lazy{
         ActivityMainBinding.inflate((layoutInflater))
     }
-
-    constructor(parcel: Parcel) : this() {
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.rcView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
-//        binding.rcView.layoutManager = GridLayoutManager(this, 4 )
-        populatePokemon()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        binding.rcView.layoutManager = GridLayoutManager(this, 4 )
+        binding.rcMain.layoutManager = GridLayoutManager(this, 4 )
         populateregion()
+        populatePokemon()
     }
     private fun populatePokemon() {
         RetrofilExecutor.doRetroExecutor().getAllPokemon().enqueue(
@@ -67,54 +58,30 @@ class MainActivity() : AppCompatActivity(), Parcelable {
         )
 
     }
-
-//    private fun ListPokemonAdapter1(listPokemon: ArrayList<PokemonResponse.PokemonData>): ListPokemonAdapter1 {
-//        //test
-//    }
-
     private fun populateregion(){
-    RetrofilExecutor.doRetroExecutor().getAllRegion().enqueue(
-        object : Callback<RegionResponse> {
+        RetrofilExecutor.doRetroExecutor().getAllRegion().enqueue(
+            object : Callback<RegionResponse> {
 
-            override fun onResponse(
-                call: Call<RegionResponse>,
-                response: Response<RegionResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val data = response.body()
-                    val adapter = ListPokemonAdapter1(data!!.results)
-                    binding.rcMain.adapter = adapter
+                override fun onResponse(
+                    call: Call<RegionResponse>,
+                    response: Response<RegionResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        val adapter = ListPokemonAdapter1(data!!.results)
+                        binding.rcMain.adapter = adapter
+                    }
+
+                }
+                override fun onFailure(call: Call<RegionResponse>, t: Throwable) {
+                    Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_SHORT).show()
                 }
 
             }
-            override fun onFailure(call: Call<RegionResponse>, t: Throwable) {
-                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_SHORT).show()
-            }
-
-        }
 
 
 
-    )
-
-}
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<MainActivity> {
-        override fun createFromParcel(parcel: Parcel): MainActivity {
-            return MainActivity(parcel)
-        }
-
-        override fun newArray(size: Int): Array<MainActivity?> {
-            return arrayOfNulls(size)
-        }
+        )
     }
 }
 
