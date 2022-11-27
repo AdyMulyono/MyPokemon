@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mypokemon.databinding.ItemPokemonBinding
 import com.example.mypokemon.models.RegionResponse
 
-class ListPokemonAdapter(private val listPokemon: ArrayList<PokemonResponse.PokemonData>)
-    :RecyclerView.Adapter<ListPokemonAdapter.ListPokemonholder>() {
+class ListPokemonAdapter1(private val listPokemon: ArrayList<RegionResponse.PokemonData>)
+    :RecyclerView.Adapter<ListPokemonAdapter1.ListPokemonholder>() {
 
     class ListPokemonholder (val binding: ItemPokemonBinding): RecyclerView.ViewHolder(binding.root){
         fun bind (datalist: RegionResponse.PokemonData){
