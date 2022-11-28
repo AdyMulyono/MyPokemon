@@ -48,6 +48,7 @@ class MainActivity() : AppCompatActivity() {
                         val data = response.body()
                         val adapter = ListPokemonAdapter(data!!.results)
                         binding.rcView.adapter = adapter
+                        binding.rcMain.adapter = adapter
 
                     }else
                     {

@@ -28,6 +28,7 @@ class DetailPokemonActivity : AppCompatActivity() {
         val id = intent.getIntExtra("id",0)
         pokemonName = intent.getStringExtra("pokemonName") ?: ""
         binding.rcView.layoutManager = LinearLayoutManager(this)
+
         populateDetailPokemon(id)
     }
 
